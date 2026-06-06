@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Portfolio de Moise Maniriho, étudiant en informatique à Toulouse, passionné de développement, cybersécurité et IA.">
+<title>Moise Maniriho | Développeur & Passionné de Tech — Toulouse</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#061018;--bg2:#0A1825;--surface:#0E1F2E;--surface2:#13283A;
+  --border:#1CA4E815;--border2:#1CA4E830;--accent:#1CA4E8;--accent2:#4FC3F7;
+  --accent-dim:#1A5C82;--text:#EAF4FB;--text2:#8FA8BD;--muted:#5A7186;
+}
+body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;overflow-x:hidden;line-height:1.6}
+::selection{background:var(--accent);color:var(--bg)}
+body::-webkit-scrollbar{width:9px}
+body::-webkit-scrollbar-track{background:var(--bg)}
+body::-webkit-scrollbar-thumb{background:var(--accent-dim);border-radius:5px}
+.glow{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;opacity:.5}
+.glow1{width:520px;height:520px;background:radial-gradient(circle,#1CA4E826,transparent 70%);top:-160px;right:-120px}
+.glow2{width:420px;height:420px;background:radial-gradient(circle,#4FC3F718,transparent 70%);bottom:30%;left:-160px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.5rem 0;transition:all .3s}
+nav.scrolled{padding:1rem 0;background:#061018e0;backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center}
+.nav-logo{font-weight:800;font-size:1.4rem;letter-spacing:.03em}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2.2rem;align-items:center}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;position:relative}
+.nav-links a:not(.nav-cta).active,.nav-links a:not(.nav-cta):hover{color:var(--accent2)}
+.nav-links a:not(.nav-cta).active::after{content:'';position:absolute;bottom:-6px;left:0;width:100%;height:2px;background:var(--accent);border-radius:2px}
+.nav-cta{border:1.5px solid var(--accent);color:var(--accent)!important;padding:.55rem 1.2rem;border-radius:8px;transition:all .2s;box-shadow:0 0 18px -6px #1CA4E8}
+.nav-cta:hover{background:var(--accent);color:var(--bg)!important}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
+.burger span{width:24px;height:2px;background:var(--text);transition:.3s}
+.container{max-width:1200px;margin:0 auto;padding:0 2rem;position:relative;z-index:1}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;padding-top:5rem;overflow:hidden}
+.dots-bg{position:absolute;inset:0;z-index:0;opacity:.35;background-image:radial-gradient(var(--accent) 1px,transparent 1px);background-size:24px 24px;-webkit-mask-image:radial-gradient(ellipse 60% 55% at 70% 40%,#000 0%,transparent 72%);mask-image:radial-gradient(ellipse 60% 55% at 70% 40%,#000 0%,transparent 72%)}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.95rem;color:var(--accent2);letter-spacing:.4em;text-transform:uppercase;margin-bottom:1.5rem;font-weight:500}
+.hero h1{font-size:clamp(2.8rem,8.5vw,6.8rem);font-weight:800;line-height:.95;letter-spacing:-0.02em;margin-bottom:2rem;text-transform:uppercase}
+.hero h1 .blue{color:var(--accent);display:block;text-shadow:0 0 55px #1CA4E855}
+.hero-desc{font-size:1.15rem;color:var(--text2);max-width:640px;margin-bottom:2.5rem;font-weight:300;line-height:1.8}
+.hero-desc strong{color:var(--text);font-weight:500}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.btn{padding:.95rem 1.8rem;border-radius:10px;font-size:.92rem;font-weight:600;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:.5rem;cursor:pointer;border:none;font-family:'Sora',sans-serif}
+.btn-p{background:var(--accent);color:var(--bg)}
+.btn-p:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 12px 35px -10px #1CA4E899}
+.btn-g{background:transparent;color:var(--text);border:1.5px solid var(--border2)}
+.btn-g:hover{border-color:var(--accent);color:var(--accent2)}
+.scroll-ind{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:.5rem;letter-spacing:.1em;z-index:1}
+.scroll-ind .line{width:1px;height:32px;background:linear-gradient(var(--accent),transparent);animation:scrolld 1.8s infinite}
+@keyframes scrolld{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+section{padding:7rem 0;position:relative}
+.sec-label{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--accent2);letter-spacing:.2em;margin-bottom:1rem;text-transform:uppercase}
+.sec-title{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:1rem;text-transform:uppercase;line-height:1.05}
+.sec-title .blue{color:var(--accent)}
+.sec-sub{color:var(--text2);font-size:1rem;margin-bottom:3rem;font-weight:300}
+
+/* PROJECTS */
+.projects{position:relative;overflow:hidden}
+.matrix{position:absolute;inset:0;z-index:0;opacity:.07;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);line-height:1.4;word-break:break-all;overflow:hidden;user-select:none;pointer-events:none}
+.proj-filters{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.filter{background:var(--surface);border:1px solid var(--border2);color:var(--text2);padding:.5rem 1.2rem;border-radius:2rem;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Sora',sans-serif;display:flex;align-items:center;gap:.45rem}
+.filter .d{width:7px;height:7px;border-radius:50%;background:var(--muted);transition:background .2s}
+.filter:hover{border-color:var(--accent)}
+.filter.active{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.filter.active .d{background:var(--bg)}
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.pcard{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:all .3s;text-decoration:none;color:inherit;display:flex;flex-direction:column}
+.pcard:hover{border-color:var(--accent-dim);transform:translateY(-5px);box-shadow:0 20px 50px -25px #1CA4E866}
+.pcard-img{height:180px;background:linear-gradient(135deg,var(--surface2),var(--bg2));display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;border-bottom:1px solid var(--border)}
+.pcard-cat{position:absolute;top:1rem;left:1rem;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--accent2);letter-spacing:.12em;text-transform:uppercase}
+.pcard-live{position:absolute;top:1rem;right:1rem;font-size:.62rem;background:#1CA4E81a;color:var(--accent2);padding:.2rem .6rem;border-radius:1rem;border:1px solid var(--accent-dim);font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:.3rem}
+.pcard-live .d{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 #1CA4E866}50%{opacity:.6;box-shadow:0 0 0 6px #1CA4E800}}
+.pcard-body{padding:1.5rem;flex:1;display:flex;flex-direction:column}
+.pcard-title{font-size:1.4rem;font-weight:800;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:-0.01em}
+.pcard-desc{color:var(--text2);font-size:.86rem;font-weight:300;margin-bottom:1.2rem;flex:1}
+.pcard-tags{display:flex;flex-wrap:wrap;gap:.45rem}
+.ptag{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--accent2);background:#1CA4E80d;border:1px solid var(--accent-dim);padding:.28rem .65rem;border-radius:2rem;letter-spacing:.04em}
+
+/* ABOUT */
+.about-top{display:grid;grid-template-columns:.85fr 1.15fr;gap:3.5rem;align-items:start;margin-bottom:3.5rem}
+.about-photo-wrap{position:relative}
+.about-photo{width:100%;border-radius:18px;object-fit:cover;border:1px solid var(--border2);position:relative;z-index:2;display:block;aspect-ratio:4/5}
+.about-photo-glow{position:absolute;inset:-25px;background:radial-gradient(circle,#1CA4E833,transparent 65%);filter:blur(35px);z-index:0}
+.about-title{font-size:clamp(2rem,4.5vw,3.4rem);font-weight:800;text-transform:uppercase;line-height:1.02;letter-spacing:-0.02em;margin-bottom:1.5rem}
+.about-bio p{color:var(--text2);font-size:1rem;margin-bottom:1rem;font-weight:300}
+.about-bio strong{color:var(--text);font-weight:600}
+.about-bio .hl{color:var(--accent2);font-weight:500}
+.about-cols{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:1rem}
+.stack-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.75rem}
+.stack-box-title{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--accent2);letter-spacing:.18em;margin-bottom:1.5rem;text-transform:uppercase}
+.stack-cat{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);letter-spacing:.1em;margin-bottom:.6rem;text-transform:uppercase}
+.stack-pills{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.3rem}
+.stack-pills:last-child{margin-bottom:0}
+.spill{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text2);background:var(--bg2);border:1px solid var(--border2);padding:.35rem .75rem;border-radius:2rem;letter-spacing:.03em}
+.exp-block{margin-bottom:2.5rem}
+.exp-label{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--accent2);letter-spacing:.15em;margin-bottom:1rem;text-transform:uppercase}
+.exp-item{font-size:1.5rem;font-weight:800;text-transform:uppercase;margin-bottom:.5rem;letter-spacing:-0.01em;color:var(--text)}
+.phil-text{color:var(--text2);font-size:.92rem;font-weight:300;line-height:1.7}
+.palm-item{color:var(--text);font-weight:600;font-size:.92rem;margin-bottom:.5rem;display:flex;gap:.5rem;align-items:flex-start}
+.palm-item::before{content:'▹';color:var(--accent)}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+.contact-title{font-size:clamp(2.2rem,5.5vw,4rem);font-weight:800;text-transform:uppercase;line-height:1;letter-spacing:-0.02em;margin-bottom:1.5rem}
+.contact-title .blue{color:var(--accent)}
+.contact-lead{color:var(--text2);font-size:1.05rem;font-weight:300;margin-bottom:2.5rem;max-width:380px}
+.cinfo{margin-bottom:1.75rem}
+.cinfo-label{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.4rem}
+.cinfo-val{font-size:1.05rem;font-weight:600}
+.cinfo-val a{color:var(--text);text-decoration:none;transition:color .2s}
+.cinfo-val a:hover{color:var(--accent2)}
+.cinfo-val .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--accent);margin-right:.5rem;animation:pulse 2s infinite}
+.csocials{display:flex;gap:.75rem;margin-top:2rem;flex-wrap:wrap}
+.csocial{display:flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--border2);padding:.7rem 1.1rem;border-radius:10px;text-decoration:none;color:var(--text);font-size:.85rem;font-weight:600;transition:all .2s}
+.csocial:hover{border-color:var(--accent);color:var(--accent2);transform:translateY(-2px)}
+.cform{background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:2.5rem}
+.cfield{margin-bottom:1.5rem}
+.cfield label{display:block;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem}
+.cfield input,.cfield textarea{width:100%;background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:.9rem 1rem;color:var(--text);font-family:'Sora',sans-serif;font-size:.95rem;transition:border-color .2s}
+.cfield input:focus,.cfield textarea:focus{outline:none;border-color:var(--accent)}
+.cfield textarea{resize:vertical;min-height:120px}
+.cform-btn{width:100%;background:linear-gradient(135deg,var(--surface2),var(--accent-dim));border:1px solid var(--accent-dim);color:var(--accent2);padding:1.1rem;border-radius:12px;font-size:.95rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:all .2s;font-family:'Sora',sans-serif;display:flex;align-items:center;justify-content:space-between}
+.cform-btn:hover{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+
+footer{padding:2.5rem 0;border-top:1px solid var(--border);text-align:center}
+.foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.foot-inner p{color:var(--muted);font-size:.82rem}
+.foot-inner .made{font-family:'JetBrains Mono',monospace}
+
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}
+
+@media(max-width:860px){
+  .nav-links{position:fixed;top:0;right:-100%;width:72%;height:100vh;background:var(--bg2);flex-direction:column;justify-content:center;gap:2.2rem;transition:right .35s;border-left:1px solid var(--border)}
+  .nav-links.open{right:0}
+  .burger{display:flex;z-index:1001}
+  .proj-grid{grid-template-columns:1fr}
+  .about-top{grid-template-columns:1fr;gap:2rem}
+  .about-photo{max-width:300px;margin:0 auto}
+  .about-cols{grid-template-columns:1fr;gap:2rem}
+  .contact-grid{grid-template-columns:1fr;gap:2.5rem}
+}
+</style>
+</head>
+<body>
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">MOI<span>SE</span></div>
+    <button class="burger" id="burger"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="navlinks">
+      <a href="#home" class="active">Accueil</a>
+      <a href="#projects">Projets</a>
+      <a href="#about">À propos</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="nav-cta">Me contacter</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="dots-bg"></div>
+  <div class="container">
+    <div class="hero-eyebrow reveal in">Développeur &amp; Passionné de Tech</div>
+    <h1 class="reveal in d1">Bienvenue<span class="blue">sur mon portfolio</span></h1>
+    <p class="hero-desc reveal in d2">Étudiant en fin de <strong>Licence MIASHS parcours informatique</strong> à l'Université Toulouse Jean Jaurès, passionné par le développement, la <strong>cybersécurité</strong> et l'<strong>intelligence artificielle</strong>. J'aime apprendre en continu et construire des projets numériques concrets.</p>
+    <div class="hero-cta reveal in d3">
+      <a href="#projects" class="btn btn-p">Voir mes projets →</a>
+      <a href="#contact" class="btn btn-g">Me contacter</a>
+    </div>
+  </div>
+  <div class="scroll-ind"><span>SCROLL</span><span class="line"></span></div>
+</header>
+
+<section id="projects" class="projects">
+  <div class="matrix" id="matrix"></div>
+  <div class="container">
+    <div class="sec-label reveal">Projets</div>
+    <h2 class="sec-title reveal d1">Travaux réalisés <span class="blue">pour le moment</span></h2>
+    <p class="sec-sub reveal d1">Une collection de projets que j'ai eu à réaliser.</p>
+    <div class="proj-filters reveal d2">
+      <button class="filter active" data-f="all"><span class="d"></span>Tous</button>
+      <button class="filter" data-f="ia"><span class="d"></span>IA</button>
+      <button class="filter" data-f="auto"><span class="d"></span>Automatisation</button>
+      <button class="filter" data-f="dev"><span class="d"></span>Développement</button>
+    </div>
+    <div class="proj-grid">
+      <a class="pcard reveal" data-cat="ia" href="https://assistant-job.vercel.app/" target="_blank">
+        <div class="pcard-img">🤖<span class="pcard-cat">SAAS · IA</span><span class="pcard-live"><span class="d"></span>EN LIGNE</span></div>
+        <div class="pcard-body">
+          <div class="pcard-title">Jobly Assistant</div>
+          <div class="pcard-desc">Plateforme d'entraînement aux entretiens propulsée par GPT-4o, avec synthèse vocale et transcription en temps réel. Des simulations réalistes pour réussir vos entretiens professionnels.</div>
+          <div class="pcard-tags"><span class="ptag">GPT-4o</span><span class="ptag">React</span><span class="ptag">PostgreSQL</span><span class="ptag">Docker</span></div>
+        </div>
+      </a>
+      <div class="pcard reveal d1" data-cat="auto">
+        <div class="pcard-img">⚙️<span class="pcard-cat">Automatisation</span></div>
+        <div class="pcard-body">
+          <div class="pcard-title">GestionLinge</div>
+          <div class="pcard-desc">Système automatisé de gestion du linge pour une conciergerie de location courte durée. Réception de réservations via webhooks, commandes Telegram, alertes de stock et facturation.</div>
+          <div class="pcard-tags"><span class="ptag">N8N</span><span class="ptag">Make</span><span class="ptag">Telegram</span><span class="ptag">Google Sheets</span></div>
+        </div>
+      </div>
+      <div class="pcard reveal" data-cat="dev">
+        <div class="pcard-img">✈️<span class="pcard-cat">Java · POO</span></div>
+        <div class="pcard-body">
+          <div class="pcard-title">RQV — Vols</div>
+          <div class="pcard-desc">Application Java de gestion de réservations de vols. Conception UML complète, développement orienté objet, jeux de tests unitaires et documentation technique.</div>
+          <div class="pcard-tags"><span class="ptag">Java</span><span class="ptag">UML</span><span class="ptag">POO</span><span class="ptag">Git</span></div>
+        </div>
+      </div>
+      <div class="pcard reveal d1" data-cat="dev">
+        <div class="pcard-img">🔗<span class="pcard-cat">Systèmes · Réseau</span></div>
+        <div class="pcard-body">
+          <div class="pcard-title">Broker TCP</div>
+          <div class="pcard-desc">Serveur multi-clients en C avec sockets TCP/IP, threads POSIX, mutex et sémaphores. Gestion de transactions concurrentes BUY/SELL en environnement Linux.</div>
+          <div class="pcard-tags"><span class="ptag">C</span><span class="ptag">Sockets</span><span class="ptag">POSIX</span><span class="ptag">Linux</span></div>
+        </div>
+      </div>
+      <div class="pcard reveal" data-cat="ia">
+        <div class="pcard-img">📊<span class="pcard-cat">NLP · Python</span></div>
+        <div class="pcard-body">
+          <div class="pcard-title">Pipeline NLP</div>
+          <div class="pcard-desc">Analyse linguistique automatisée sur corpus XML de manuscrits historiques. POS tagging, calcul de métriques WER/CER et génération de rapports structurés.</div>
+          <div class="pcard-tags"><span class="ptag">Python</span><span class="ptag">spaCy</span><span class="ptag">pandas</span><span class="ptag">XML</span></div>
+        </div>
+      </div>
+      <div class="pcard reveal d1" data-cat="dev">
+        <div class="pcard-img">🗄️<span class="pcard-cat">SQL · Reporting</span></div>
+        <div class="pcard-body">
+          <div class="pcard-title">Dashboard SQL</div>
+          <div class="pcard-desc">Extraction, nettoyage et structuration de données multi-sources. Tableaux de bord avec indicateurs de performance, graphiques et synthèses documentées.</div>
+          <div class="pcard-tags"><span class="ptag">SQL</span><span class="ptag">Access</span><span class="ptag">Excel</span><span class="ptag">Power BI</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="sec-label reveal">Le profil</div>
+    <div class="about-top">
+      <div class="about-photo-wrap reveal d1">
+        <div class="about-photo-glow"></div>
+        <img class="about-photo" src="data:image/jpeg;base64,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" alt="Moise Maniriho">
+      </div>
+      <div class="reveal d2">
+        <h2 class="about-title">Développeur &amp; passionné de <span style="color:var(--accent)">tech</span></h2>
+        <div class="about-bio">
+          <p>Je m'appelle <strong>Moise Maniriho</strong>, étudiant en fin de licence MIASHS parcours informatique à l'Université Toulouse Jean Jaurès. Passionné par le développement et les nouvelles technologies, je m'oriente vers une poursuite d'études dans les domaines de la <span class="hl">cybersécurité</span> ou de l'<span class="hl">intelligence artificielle</span>.</p>
+          <p>Mon parcours a débuté au <strong>Rwanda</strong>, où j'ai obtenu un baccalauréat scientifique avec mention Bien. Depuis, j'ai développé une solide base en informatique, que je mets en pratique à travers des projets concrets.</p>
+          <p>En parallèle de mes études, j'effectue un stage où je développe des <strong>systèmes d'automatisation intégrant de l'intelligence artificielle</strong>. J'ai également récemment finalisé <strong>Jobly</strong>, ma première plateforme déployée en ligne. Curieux, rigoureux et motivé, je cherche constamment à apprendre, expérimenter et construire des solutions utiles.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-cols">
+      <div class="reveal">
+        <div class="stack-box">
+          <div class="stack-box-title">Stack &amp; Outils</div>
+          <div class="stack-cat">Langages</div>
+          <div class="stack-pills"><span class="spill">PYTHON</span><span class="spill">JAVA</span><span class="spill">C</span><span class="spill">JAVASCRIPT</span><span class="spill">SQL</span></div>
+          <div class="stack-cat">Front-end</div>
+          <div class="stack-pills"><span class="spill">REACT</span><span class="spill">HTML5</span><span class="spill">CSS3</span></div>
+          <div class="stack-cat">Back-end &amp; Data</div>
+          <div class="stack-pills"><span class="spill">NODE.JS</span><span class="spill">POSTGRESQL</span><span class="spill">REDIS</span><span class="spill">PANDAS</span></div>
+          <div class="stack-cat">DevOps &amp; Outils</div>
+          <div class="stack-pills"><span class="spill">GIT</span><span class="spill">DOCKER</span><span class="spill">N8N</span><span class="spill">LINUX</span></div>
+        </div>
+      </div>
+      <div class="reveal d1">
+        <div class="exp-block">
+          <div class="exp-label">Expertise clé</div>
+          <div class="exp-item">Développement</div>
+          <div class="exp-item">Intégration IA</div>
+          <div class="exp-item">Automatisation</div>
+          <div class="exp-item" style="color:var(--accent)">Cybersécurité</div>
+        </div>
+        <div class="exp-block">
+          <div class="exp-label">Philosophie</div>
+          <p class="phil-text">Apprendre vite, construire concret. Je crois qu'on progresse vraiment en mettant les mains dans le code et en confrontant ses idées à la réalité d'un projet déployé.</p>
+        </div>
+        <div class="exp-block" style="margin-bottom:0">
+          <div class="exp-label">Palmarès</div>
+          <div class="palm-item">Baccalauréat Scientifique — mention Bien</div>
+          <div class="palm-item">Background mathématiques &amp; statistiques (MIASHS)</div>
+          <div class="palm-item">Première plateforme IA déployée en production</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="sec-label">Contact</div>
+        <h2 class="contact-title">Synchronisons<br>nos <span class="blue">fréquences</span></h2>
+        <p class="contact-lead">Toujours curieux d'apprendre et ouvert aux opportunités, projets et échanges autour de la tech, de l'IA et de la cybersécurité.</p>
+        <div class="cinfo">
+          <div class="cinfo-label">Email</div>
+          <div class="cinfo-val"><a href="mailto:moisemaniriho056@gmail.com">moisemaniriho056@gmail.com</a></div>
+        </div>
+        <div class="cinfo">
+          <div class="cinfo-label">Localisation</div>
+          <div class="cinfo-val">Toulouse / Distanciel &amp; Présentiel</div>
+        </div>
+        <div class="cinfo">
+          <div class="cinfo-label">Disponibilité</div>
+          <div class="cinfo-val"><span class="dot"></span>Ouvert aux opportunités</div>
+        </div>
+        <div class="csocials">
+          <a class="csocial" href="https://www.linkedin.com/in/moise-maniriho-106846273/" target="_blank">💼 LinkedIn</a>
+          <a class="csocial" href="https://github.com/moisemaniriho056" target="_blank">⌥ GitHub</a>
+          <a class="csocial" href="https://assistant-job.vercel.app/" target="_blank">🚀 Jobly</a>
+        </div>
+      </div>
+      <div class="reveal d1">
+        <div class="cform">
+          <div class="cfield">
+            <label>Nom &amp; Prénom</label>
+            <input type="text" id="f-name" placeholder="Votre nom">
+          </div>
+          <div class="cfield">
+            <label>Email</label>
+            <input type="email" id="f-email" placeholder="votre@email.com">
+          </div>
+          <div class="cfield">
+            <label>Message</label>
+            <textarea id="f-msg" placeholder="Parlez-moi de votre projet..."></textarea>
+          </div>
+          <button class="cform-btn" onclick="sendMail()">Envoyer le message <span>→</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-inner">
+      <p>© 2026 Moise Maniriho — Toulouse, France</p>
+      <p class="made">Conçu &amp; développé avec ♥</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
+const burger=document.getElementById('burger'),navlinks=document.getElementById('navlinks');
+burger.addEventListener('click',()=>navlinks.classList.toggle('open'));
+navlinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navlinks.classList.remove('open')));
+// reveal
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>{if(!el.classList.contains('in'))obs.observe(el);});
+// active nav
+const secs=[...document.querySelectorAll('section[id],header[id]')];
+const links=[...navlinks.querySelectorAll('a:not(.nav-cta)')];
+window.addEventListener('scroll',()=>{let cur='home';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id;});links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+cur));});
+// project filters
+const filters=document.querySelectorAll('.filter'),cards=document.querySelectorAll('.pcard');
+filters.forEach(f=>f.addEventListener('click',()=>{
+  filters.forEach(x=>x.classList.remove('active'));f.classList.add('active');
+  const v=f.dataset.f;
+  cards.forEach(c=>{const show=v==='all'||c.dataset.cat===v;c.style.display=show?'flex':'none';});
+}));
+// matrix bg
+const chars='01ABCDEF$#@!%&*<>{}[]ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+let m='';for(let i=0;i<4000;i++){m+=chars[Math.floor(Math.random()*chars.length)];}
+document.getElementById('matrix').textContent=m;
+// mailto form
+function sendMail(){
+  const n=document.getElementById('f-name').value||'';
+  const e=document.getElementById('f-email').value||'';
+  const msg=document.getElementById('f-msg').value||'';
+  const body=encodeURIComponent('Nom: '+n+'\nEmail: '+e+'\n\n'+msg);
+  const subj=encodeURIComponent('Contact portfolio — '+n);
+  window.location.href='mailto:moisemaniriho056@gmail.com?subject='+subj+'&body='+body;
+}
+</script>
+</body>
+</html>
